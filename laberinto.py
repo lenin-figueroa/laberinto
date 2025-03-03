@@ -1,10 +1,8 @@
 import random
 
 def generar_laberinto(n):
-
     # Inicializamos el laberinto como una lista vacía
     laberinto = []
-
     # Crear bordes de asteriscos
     for i in range(n):
         fila = []
@@ -23,9 +21,11 @@ def generar_laberinto(n):
 
     return laberinto
 
+
 def imprimir_laberinto(laberinto):
     for fila in laberinto:
         print(''.join(fila))
+
 
 def encontrar_rutas(laberinto, x, y, salida_x, salida_y, ruta_actual, rutas):
     #Salida o entrada se salen del laberinto
@@ -49,9 +49,13 @@ def encontrar_rutas(laberinto, x, y, salida_x, salida_y, ruta_actual, rutas):
     laberinto[x][y] = ' '  # Desmarcar
     ruta_actual.pop()
 
+
 def marcar_ruta(laberinto, ruta, numero_ruta):
     # Copiar el laberinto para no modificar el original
-    laberinto_copia = [fila.copy() for fila in laberinto]
+    laberinto_copia = []
+    for fila in laberinto:
+        nueva_fila = fila.copy()  # Copiar cada fila
+        laberinto_copia.append(nueva_fila)
 
     # Marcar la ruta en el laberinto copiado
     for x, y in ruta:
@@ -63,24 +67,25 @@ def marcar_ruta(laberinto, ruta, numero_ruta):
 
 
 def main():
-    n = 10  # Tamaño del laberinto
-    #laberinto = generar_laberinto(n)
+    n = 9  # Tamaño del laberinto
+    laberinto = generar_laberinto(n)
 
     #Solicitar coordenadas de entrada y salida
     #entrada_x, entrada_y = map(int, input("Coordenadas de entrada (x y): ").split())
     #salida_x, salida_y = map(int, input("Coordenadas de salida (x y): ").split())
 
-    # Laberinto de prueba
-    laberinto = [
-        ['*', '*', '*', '*', '*', '*', '*', '*', '*'],
-        ['*', ' ', '*', 'P', ' ', ' ', '*', ' ', '*'],
-        ['*', ' ', '*', '*', '*', ' ', ' ', ' ', 'S'],
-        ['*', ' ', ' ', ' ', '*', ' ', '*', ' ', '*'],
-        ['*', '*', '*', ' ', '*', ' ', '*', ' ', '*'],
-        ['*', ' ', '*', ' ', ' ', ' ', ' ', ' ', '*'],
-        ['*', ' ', '*', ' ', ' ', ' ', '*', ' ', '*'],
-        ['*', '*', '*', '*', '*', '*', '*', '*', '*']
-    ]
+    ## Laberinto de prueba
+    #laberinto = [
+    #    ['*', '*', '*', '*', '*', '*', '*', '*', '*'],
+    #    ['*', ' ', '*', 'P', ' ', ' ', '*', ' ', '*'],
+    #    ['*', ' ', '*', '*', '*', ' ', ' ', ' ', 'S'],
+    #    ['*', ' ', ' ', ' ', '*', ' ', '*', ' ', '*'],
+    #    ['*', '*', '*', ' ', '*', ' ', '*', ' ', '*'],
+    #    ['*', ' ', '*', ' ', ' ', ' ', ' ', ' ', '*'],
+    #    ['*', ' ', '*', ' ', ' ', ' ', '*', ' ', '*'],
+    #    ['*', ' ', ' ', ' ', ' ', ' ', '*', ' ', '*'],
+    #    ['*', '*', '*', '*', '*', '*', '*', '*', '*']
+    #]
 
     # Solicitar coordenadas de entrada y salida
     entrada_x, entrada_y = 1, 3  # Coordenadas de 'P'
