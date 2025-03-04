@@ -63,20 +63,32 @@ def marcar_ruta(laberinto, ruta, numero_ruta):
 
     return laberinto_copia
 
+def solicitar_tamano_laberinto():
+    while True:
+        n = int(input("Ingrese el tamaño del laberinto: "))
+        if n > 0:
+            return n
+        print("Tamaño de laberinto inválido. Intente nuevamente.")
+
+
+def solicitar_coordenadas(n, mensaje):
+    while True:
+        try:
+            x, y = map(int, input(mensaje).split())
+            if 0 <= x < n and 0 <= y < n:
+                return x, y
+            else:
+                print(f"Coordenadas inválidas. Asegúrate de que estén dentro del rango [0, {n-1}].")
+        except ValueError:
+            print("Entrada inválida. Ingresa dos números separados por un espacio.")
+
 
 def main():
-    n = 9 # Tamaño del laberinto
-    laberinto = generar_laberinto(n)
-
-    #Solicitar coordenadas de entrada y salida
-    entrada_x, entrada_y = map(int, input("Coordenadas de entrada (x y): ").split())
-    salida_x, salida_y = map(int, input("Coordenadas de salida (x y): ").split())
-
-    #Laberinto para testing
+    #Laberinto para Testing
     #laberinto = [
     #    ['*', '*', '*', '*', '*', '*', '*', '*', '*'],
     #    ['*', ' ', '*', 'P', ' ', ' ', '*', ' ', '*'],
-    #    ['*', ' ', '*', '*', '*', ' ', ' ', ' ', 'S'],
+    #    ['*', ' ', '*', '*', '*', ' ', '*', ' ', 'S'],
     #    ['*', ' ', ' ', ' ', '*', ' ', '*', ' ', '*'],
     #    ['*', '*', '*', ' ', '*', ' ', ' ', ' ', '*'],
     #    ['*', ' ', '*', ' ', ' ', ' ', '*', ' ', '*'],
@@ -84,16 +96,18 @@ def main():
     #    ['*', ' ', ' ', ' ', ' ', ' ', '*', ' ', '*'],
     #    ['*', '*', '*', '*', '*', '*', '*', '*', '*']
     #]
-
-    #Solicitar coordenadas de entrada y salida para Testing
     #entrada_x, entrada_y = 1, 3  # Coordenadas de 'P'
     #salida_x, salida_y = 2, 8  # Coordenadas de 'S'
 
-    # Verificar que las coordenadas estén dentro del laberinto y no sean paredes
-    if (entrada_x < 0 or entrada_x >= n or entrada_y < 0 or entrada_y >= n or
-            salida_x < 0 or salida_x >= n or salida_y < 0 or salida_y >= n):
-        print("Coordenadas inválidas. Asegúrate de que esten dentro del laberinto.")
-        return
+    ## Solicitar tamaño del laberinto
+    n = solicitar_tamano_laberinto()
+    laberinto = generar_laberinto(n)
+
+    # Solicitar coordenadas de entrada y salida
+    print("\nCoordenadas de entrada:")
+    entrada_x, entrada_y = solicitar_coordenadas(n, "Ingrese las coordenadas de entrada (x y): ")
+    print("\nCoordenadas de salida:")
+    salida_x, salida_y = solicitar_coordenadas(n, "Ingrese las coordenadas de salida (x y): ")
 
     laberinto[entrada_x][entrada_y] = 'P'
     laberinto[salida_x][salida_y] = 'S'
@@ -112,6 +126,7 @@ def main():
             print(f"\nRuta {i + 1}:")
             laberinto_ruta = marcar_ruta(laberinto, ruta, i + 1)
             imprimir_laberinto(laberinto_ruta)
+
 
 if __name__ == "__main__":
     main()
