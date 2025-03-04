@@ -59,42 +59,40 @@ def marcar_ruta(laberinto, ruta, numero_ruta):
 
     # Marcar la ruta en el laberinto copiado
     for x, y in ruta:
-        if laberinto_copia[x][y] == ' ':
-            laberinto_copia[x][y] = str(numero_ruta)
-    laberinto_copia[ruta[-1][0]][ruta[-1][1]] = str(numero_ruta)
+        laberinto_copia[x][y] = str(numero_ruta)
 
     return laberinto_copia
 
 
 def main():
-    n = 9  # Tamaño del laberinto
+    n = 9 # Tamaño del laberinto
     laberinto = generar_laberinto(n)
 
     #Solicitar coordenadas de entrada y salida
-    #entrada_x, entrada_y = map(int, input("Coordenadas de entrada (x y): ").split())
-    #salida_x, salida_y = map(int, input("Coordenadas de salida (x y): ").split())
+    entrada_x, entrada_y = map(int, input("Coordenadas de entrada (x y): ").split())
+    salida_x, salida_y = map(int, input("Coordenadas de salida (x y): ").split())
 
-    ## Laberinto de prueba
+    #Laberinto para testing
     #laberinto = [
     #    ['*', '*', '*', '*', '*', '*', '*', '*', '*'],
     #    ['*', ' ', '*', 'P', ' ', ' ', '*', ' ', '*'],
     #    ['*', ' ', '*', '*', '*', ' ', ' ', ' ', 'S'],
     #    ['*', ' ', ' ', ' ', '*', ' ', '*', ' ', '*'],
-    #    ['*', '*', '*', ' ', '*', ' ', '*', ' ', '*'],
-    #    ['*', ' ', '*', ' ', ' ', ' ', ' ', ' ', '*'],
+    #    ['*', '*', '*', ' ', '*', ' ', ' ', ' ', '*'],
+    #    ['*', ' ', '*', ' ', ' ', ' ', '*', ' ', '*'],
     #    ['*', ' ', '*', ' ', ' ', ' ', '*', ' ', '*'],
     #    ['*', ' ', ' ', ' ', ' ', ' ', '*', ' ', '*'],
     #    ['*', '*', '*', '*', '*', '*', '*', '*', '*']
     #]
 
-    # Solicitar coordenadas de entrada y salida
-    entrada_x, entrada_y = 1, 3  # Coordenadas de 'P'
-    salida_x, salida_y = 2, 8  # Coordenadas de 'S'
+    #Solicitar coordenadas de entrada y salida para Testing
+    #entrada_x, entrada_y = 1, 3  # Coordenadas de 'P'
+    #salida_x, salida_y = 2, 8  # Coordenadas de 'S'
 
     # Verificar que las coordenadas estén dentro del laberinto y no sean paredes
     if (entrada_x < 0 or entrada_x >= n or entrada_y < 0 or entrada_y >= n or
             salida_x < 0 or salida_x >= n or salida_y < 0 or salida_y >= n):
-        print("Coordenadas inválidas. Asegúrate de que no estén en los bordes o en una pared.")
+        print("Coordenadas inválidas. Asegúrate de que esten dentro del laberinto.")
         return
 
     laberinto[entrada_x][entrada_y] = 'P'
